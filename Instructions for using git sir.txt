@@ -1,0 +1,15 @@
+Whenever you first start your work, git pull to get all incoming changes from the main branch.
+
+Sometimes a merge conflict might occur, as the other person might accidentally editted the part you were working on.
+1> A merge conflict message will appear, and indicate which file has to be resolved
+2> Open the file, the HEAD represents your original work, and the line below shows incoming changes
+3> Edit and change wherever the conflict occurs
+4> Once all conflicts are resolved, save and type <git -add .>, <git -commit "State message here">, <git -push>
+			(adding your changes to your repository) (commiting all changes at your repository) (pushing repo to main branch)
+
+
+If no merge conflict occurs, just add whichever file you like. When you are done, repeat step 4. If a merge conflict occurs again when you are 
+pushing to main branch, just resolve the merge conflict like above.
+
+If you are stuck in the VIM editor, <ctrl s> to save, and type <:wq> + <enter> to quit.
+  
