@@ -2,7 +2,7 @@
 
 ## Steps to run the program
 
-Step 1: Download our zipped folder, extract it to the Desktop
+Step 1: Download as ZIP, extract it to the Desktop
 
 Step 2: Rename the folder to FYP (remove the -master suffix)
 
