@@ -15,8 +15,6 @@ from sklearn.utils.multiclass import unique_labels
 from imblearn.combine import SMOTETomek
 from imblearn.under_sampling import TomekLinks
 from imblearn.over_sampling import SMOTE
-import sys
-sys.path.append("..")
 
 def preProcessing(text, stopword = False, stem = False):
     """
@@ -28,9 +26,7 @@ def preProcessing(text, stopword = False, stem = False):
     replaceDigit = re.compile(r'\d+', re.IGNORECASE)
     text = specialCharRemoval.sub('', text)
     text = replaceDigit.sub('', text)
-
     text = " ".join(text.lower().split())
-    
     
     # Optionally, remove stop words
     if stopword:
@@ -64,9 +60,6 @@ def plot_2d_space(X, y, label='Classes'):
     
     
 def imbalanced_resampling(method, x, y):
-    """
-    Resampling method
-    """
     if method == "under":
         sampling = TomekLinks(sampling_strategy = "auto")
     elif method == "over":

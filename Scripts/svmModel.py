@@ -16,13 +16,13 @@ from sklearn import svm
 from sklearn.metrics import classification_report
 from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score
-
 from function import preProcessing, plot_cf
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Read csv file and extract specific columns that we want to work on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-path = "C:/Users/user/Desktop/FYP/reviews.csv"
+path = "C:/Users/A/Desktop/FYP/reviews.csv"
 data = pd.read_csv(path)
 rev = data[["pros", "cons", "overall-ratings", "work-balance-stars", "culture-values-stars", "carrer-opportunities-stars", "comp-benefit-stars", "senior-mangemnet-stars"]]
 rev = rev.rename(columns = {"overall-ratings": "rating", "work-balance-stars": "work_balance", "culture-values-stars": "culture_val", 
@@ -70,8 +70,8 @@ pred = SVM_linear.predict(x_test_rate)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Save model (ratings predict overall rating) to disk
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-#filename = 'svm_model_rat.sav'
-#pickle.dump(SVM_linear, open(filename, 'wb'))
+filename = 'svm_model_rat.sav'
+pickle.dump(SVM_linear, open(filename, 'wb'))
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    

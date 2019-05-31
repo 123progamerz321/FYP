@@ -26,7 +26,7 @@ from function import loadEmbedding, createEmbeddingMatrix, modelHistory, plot_cf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Read csv file and extract specific columns that we want to work on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-path = "C:/Users/user/Desktop/FYP/reviews.csv"
+path = "C:/Users/A/Desktop/FYP/reviews.csv"
 data = pd.read_csv(path)
 rev = data[["pros", "cons", "overall-ratings", "work-balance-stars", "culture-values-stars", "carrer-opportunities-stars", "comp-benefit-stars", "senior-mangemnet-stars"]]
 rev = rev.rename(columns = {"overall-ratings": "rating", "work-balance-stars": "work_balance", "culture-values-stars": "culture_val", 
@@ -83,8 +83,8 @@ epochs = 20
 val_split = 0.1
 
 inp = Input(shape=(1, maxlen))
-#x = Bidirectional(CuDNNLSTM(50, return_sequences=True))(inp)
-x = Bidirectional(LSTM(50, return_sequences=True, dropout=0.1, recurrent_dropout=0.1))(inp)
+x = Bidirectional(CuDNNLSTM(50, return_sequences=True))(inp)
+#x = Bidirectional(LSTM(50, return_sequences=True, dropout=0.1, recurrent_dropout=0.1))(inp)
 x = GlobalMaxPool1D()(x)
 x = Dense(50, activation="relu")(x)
 x = Dropout(0.1)(x)
@@ -103,13 +103,13 @@ Save model(aspects rating) to JSON
 GPU available: uncoment line 104 - 110
 GPU unavailable: uncoment line 113 - 119
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-## serialize model to JSON (GPU version)
-#model_json = model_rate.to_json()
-#with open("ratings_model_gpu.json", "w") as json_file:
-#    json_file.write(model_json)
-#
-## serialize weights to HDF5
-#model_rate.save_weights("ratings_model_gpu.h5")
+# serialize model to JSON (GPU version)
+model_json = model_rate.to_json()
+with open("ratings_model_gpu.json", "w") as json_file:
+    json_file.write(model_json)
+
+# serialize weights to HDF5
+model_rate.save_weights("ratings_model_gpu.h5")
 
 ## serialize model to JSON (CPU version)
 #model_json = model_rate.to_json()
@@ -206,8 +206,8 @@ inp = Input(shape=(maxlen,))
 # Single channel architecture LSTM-CNN
 x = Embedding(min(max_features, len(tokenizer.word_index)), embed_size, weights=[embedding_matrix], trainable = True)(inp)
 x = SpatialDropout1D(0.2)(x)
-#x = Bidirectional(CuDNNLSTM(50, return_sequences=True))(x)
-x = Bidirectional(LSTM(50, return_sequences=True, dropout=0.1, recurrent_dropout=0.1))(x)
+x = Bidirectional(CuDNNLSTM(50, return_sequences=True))(x)
+#x = Bidirectional(LSTM(50, return_sequences=True, dropout=0.1, recurrent_dropout=0.1))(x)
 conv1 = Conv1D(50, kernel_size = 3, activation = 'relu')(x)
 conv2 = Conv1D(50, kernel_size = 4, activation = 'relu')(x)
 conv3 = Conv1D(50, kernel_size = 5, activation = 'relu')(x)

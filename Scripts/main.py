@@ -45,9 +45,12 @@ if __name__ == "__main__":
     ratings_model.load_weights(ratModelWeights)
     ratings_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
     
+    # load svm models
+    svm_model_rev = pickle.load(open("svm_model_rev.sav", "rb"))
+    svm_model_rat = pickle.load(open("svm_model_rat.sav", "rb"))
+    
     # Ask user to enter pros and cons reviews or aspect rating
-    print ("\nGPU availability: " + str(tf.test.is_gpu_available()))
-    print ("Program loaded successfully")
+    print ()
     mode = input("Use review or aspect ratings to predict overall rating (r/a)? ")
     if mode.strip().lower() == "r":
         pros_rev = input("Enter pros review: ")
@@ -63,18 +66,17 @@ if __name__ == "__main__":
         tokenized_rev = tokenizer.texts_to_sequences(combine_rev)
         user_rev = pad_sequences(tokenized_rev, maxlen=maxlen, padding='post', truncating='post')
         
-        # Predict rating based on user review (LSTM-CNN)
-        model_pred = review_model.predict([user_rev], batch_size=1024, verbose=1)
-        print ("LSTM-CNN Overall Rating:", np.argmax(model_pred[0]))
-        
         # SVM
-        loaded_model = pickle.load(open("svm_model_rev.sav", "rb"))
         with open("tfidfVectorizer.pickle", "rb") as handle:
                 vectorizer = pickle.load(handle)
         
         X_test_tfidf = vectorizer.transform(combine_rev)
-        result = loaded_model.predict(X_test_tfidf)
-        print ("SVM Overall Rating:", int(result[0]))
+        result = svm_model_rev.predict(X_test_tfidf)
+        print ("\nSVM Overall Rating:", int(result[0]))
+        
+        # Predict rating based on user review (LSTM-CNN)
+        model_pred = review_model.predict([user_rev], batch_size=1024, verbose=0)
+        print ("LSTM-CNN Overall Rating:", np.argmax(model_pred[0]))
     
     elif mode.strip().lower() == "a":
         work_bal = input("Work balance: ")
@@ -87,14 +89,13 @@ if __name__ == "__main__":
         nn_inp = user_inp.reshape(-1, 1, 5)
         svm_inp = user_inp.reshape(-1, 5)
         
-        # Predict rating based on other ratings(LSTM-CNN)
-        model_pred = ratings_model.predict([nn_inp], batch_size=1024, verbose=1)
-        print ("LSTM-CNN Overall Rating:", np.argmax(model_pred[0]))
-        
         # SVM
-        loaded_model = pickle.load(open("svm_model_rat.sav", "rb"))
-        result = loaded_model.predict(svm_inp)
-        print ("SVM Overall Rating:", int(result[0]))
+        result = svm_model_rat.predict(svm_inp)
+        print ("\nSVM Overall Rating:", int(result[0]))
+        
+        # Predict rating based on other ratings(LSTM-CNN)
+        model_pred = ratings_model.predict([nn_inp], batch_size=1024, verbose=0)
+        print ("LSTM-CNN Overall Rating:", np.argmax(model_pred[0]))
         
     else:
         print ("Invalid input")

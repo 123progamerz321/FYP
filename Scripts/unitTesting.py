@@ -13,59 +13,59 @@ import os
 
 #Test for removing non-alphabetic characters, digits, tab, space
 class unitTesting(unittest.TestCase):
-#    def test_removeNonAlphabetics(self):
-#        self.assertTrue(preProcessing("#@$&@#)($*@)") == "")
-#        self.assertTrue(preProcessing("abc#@$&@#") == "abc")
-#        self.assertTrue(preProcessing("") == "")
-#                                      
-#    def test_removeDigits(self):
-#        self.assertTrue(preProcessing("123456") == "")
-#        self.assertTrue(preProcessing("asd12bcd") == "asdbcd")
-#        self.assertTrue(preProcessing("") == "")
-#        
-#    def test_removeBoth(self):
-#        self.assertTrue(preProcessing("1@#$$abc23456") == "abc")
-#        self.assertTrue(preProcessing("asd12bcd*@#") == "asdbcd")
-#        self.assertTrue(preProcessing(" ") == "")
-#        self.assertTrue(preProcessing("  ") == "")
-#        self.assertTrue(preProcessing("abcdef") == "abcdef")
+    def test_removeNonAlphabetics(self):
+        self.assertTrue(preProcessing("#@$&@#)($*@)") == "")
+        self.assertTrue(preProcessing("abc#@$&@#") == "abc")
+        self.assertTrue(preProcessing("") == "")
+                                      
+    def test_removeDigits(self):
+        self.assertTrue(preProcessing("123456") == "")
+        self.assertTrue(preProcessing("asd12bcd") == "asdbcd")
+        self.assertTrue(preProcessing("") == "")
+        
+    def test_removeBoth(self):
+        self.assertTrue(preProcessing("1@#$$abc23456") == "abc")
+        self.assertTrue(preProcessing("asd12bcd*@#") == "asdbcd")
+        self.assertTrue(preProcessing(" ") == "")
+        self.assertTrue(preProcessing("  ") == "")
+        self.assertTrue(preProcessing("abcdef") == "abcdef")
 
-#    def test_models_tokenizer_vectorizer_are_saved(self):
-#        if (os.path.isfile("tokenizer.pickle")):
-#            os.remove("tokenizer.pickle")
-#
-#        if (os.path.isfile("tfidfVectorizer.pickle")):
-#            os.remove("tfidfVectorizer.pickle")
-#                
-#        if (os.path.isfile("review_model_gpu.json")):
-#            os.remove("review_model_gpu.json")
-#            
-#        if (os.path.isfile("review_model_gpu.h5")):
-#            os.remove("review_model_gpu.h5")
-#            
-#        if (os.path.isfile("svm_model_rev.sav")):
-#            os.remove("svm_model_rev.sav")
-#            
-#        import nnModel
-#        import svmModel
-#        
-#        self.assertTrue(os.path.isfile("tokenizer.pickle"))
-#        self.assertTrue(os.path.isfile("tfidfVectorizer.pickle"))
-#        self.assertTrue(os.path.isfile("review_model_gpu.json"))    
-#        self.assertTrue(os.path.isfile("review_model_gpu.h5"))
-#        self.assertTrue(os.path.isfile("svm_model_rev.sav"))
+    def test_models_tokenizer_vectorizer_are_saved(self):
+        if (os.path.isfile("tokenizer.pickle")):
+            os.remove("tokenizer.pickle")
+
+        if (os.path.isfile("tfidfVectorizer.pickle")):
+            os.remove("tfidfVectorizer.pickle")
+                
+        if (os.path.isfile("review_model_gpu.json")):
+            os.remove("review_model_gpu.json")
+            
+        if (os.path.isfile("review_model_gpu.h5")):
+            os.remove("review_model_gpu.h5")
+            
+        if (os.path.isfile("svm_model_rev.sav")):
+            os.remove("svm_model_rev.sav")
+            
+        import nnModel
+        import svmModel
+        
+        self.assertTrue(os.path.isfile("tokenizer.pickle"))
+        self.assertTrue(os.path.isfile("tfidfVectorizer.pickle"))
+        self.assertTrue(os.path.isfile("review_model_gpu.json"))    
+        self.assertTrue(os.path.isfile("review_model_gpu.h5"))
+        self.assertTrue(os.path.isfile("svm_model_rev.sav"))
     
-#    def test_convert_to_TFIDF(self):
-#        import pandas as pd
-#        from sklearn.feature_extraction.text import TfidfVectorizer
-#        numOfRev = 2
-#        numOfFeatures = 9 # Boss, is, very, nice, salary, high, working, environment, good
-#        data = ["Boss is very nice, salary is very high", "working environment is very good"]
-#        data = pd.Series(data)
-#        TFIDF_vectorizer = TfidfVectorizer()
-#        feature_vector = TFIDF_vectorizer.fit_transform(data)
-#        self.assertEqual(feature_vector.shape[0], numOfRev)
-#        self.assertEqual(feature_vector.shape[1], numOfFeatures)
+    def test_convert_to_TFIDF(self):
+        import pandas as pd
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        numOfRev = 2
+        numOfFeatures = 9 # Boss, is, very, nice, salary, high, working, environment, good
+        data = ["Boss is very nice, salary is very high", "working environment is very good"]
+        data = pd.Series(data)
+        TFIDF_vectorizer = TfidfVectorizer()
+        feature_vector = TFIDF_vectorizer.fit_transform(data)
+        self.assertEqual(feature_vector.shape[0], numOfRev)
+        self.assertEqual(feature_vector.shape[1], numOfFeatures)
     
     def test_convert_to_TFIDF(self):
         import pickle
