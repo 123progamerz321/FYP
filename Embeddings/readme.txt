@@ -1,0 +1,1 @@
+This file stores all word embeddings
