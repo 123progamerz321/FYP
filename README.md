@@ -1,6 +1,6 @@
 # FYP-Review Rating Prediction and Analysis
 
-Steps to run the program
+## Steps to run the program
 
 Step 1: Download our zipped folder, extract it to the Desktop
 
