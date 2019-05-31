@@ -38,7 +38,7 @@ Step 9: Enter the following command:
 python main.py
 ```
 
-## For data exploratory/helper purposes
+## For data exploratory/experimentation/helper purposes
 - function.py (Contains all helper functions)
 - nnModel.py (Neural network training)
 - svmModel.py (SVM training)
