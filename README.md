@@ -10,4 +10,5 @@ Step 3: Download Glove embeddings http://nlp.stanford.edu/data/glove.840B.300d.z
 
 Step 4: Download FastText https://www.kaggle.com/yekenot/fasttext-crawl-300d-2m, and extract it to ..\Desktop\FYP\Embeddings
 
-Step 5: Download Word2Vec
+Step 5: Download Word2Vec https://www.kaggle.com/sandreds/googlenewsvectorsnegative300#GoogleNews-vectors-negative300.bin, and extract it to ..\Desktop\FYP\Embeddings
+
