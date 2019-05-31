@@ -1,0 +1,15 @@
+final model
+1) 123 cons, 4 combine, 5 pros - 0.5717
+2) 1 cons, 234 combine, 5 pros - 0.5747
+3) 1 cons, 2 combine, 345 pros - 0.4598
+4) 12 cons, 34 combine, 5 pros - 0.5627
+5) 1 cons, 23 combine, 45 pros - 0.5114
+6) 12 cons, 3 combine, 45 pros - 0.5116
+7) 13 cons, 24 combine, 5 pros - 0.5760 fight
+8) 3 cons, 124 combine, 5 pros - 0.5836 fight
+9) 3 cons, 24 combine, 15 pros - 0.5746 fight
+10) 3 cons, 14 combine, 25 pros - 0.5834 fight
+11) 1 cons, 24 combine, 35 pros - 0.5185 
+
+semi-final model (average of 5 rounds)
+1) 13 cons, 24 combine, 5 pros - 

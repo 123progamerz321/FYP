@@ -1,0 +1,97 @@
+1) Since the text descriptions are generally short, I will be using GRU units as opposed to LSTM units. With shorter descriptions, 
+   we have less need for a memory unit and can benefit from GRU’s more efficient learning algorithm.
+
+2) Bidirectional means that the network will learn the text sequences in their original order as well as the reverse order in which the words appear.
+
+3) Unbalanced classes are problematic, but can be addressed by sampling the larger classes or setting class weights. 
+   The total absence of one class, however, is much more concerning. We observed earlier that our classes are not very balanced. 
+   Classes with higher weights attached to them (class 0 and class 4) will have a higher impact on the learning algorithm. Each instance of class 0 is treated as 7 instances.
+
+4) Note on choosing max_len: capturing too few words results in lost information, but capturing too many results in issues with data sparsity. 
+   Ideally, we want to choose a value which captures the entirety of most text descriptions without introducing too many zero sequences.
+
+5) stopwords and stemming will cause accuracy decreases
+
+6) tomek-links rating 1,2,3 doesn't increase much accuracy
+
+7) what is this rating prediction model good for? 
+https://www.kaggle.com/athoul01/predicting-yelp-ratings-from-review-text?fbclid=IwAR3KiY-6o3Ivw11HQOy-QzCE1Ft3sWog-EpVF2zLCOFkOUMjGQOdc3rbl1k
+
+Combination
+1) 123 4 5 (77)
+2) 1 234 5 (63)
+3) 1 2 345 (47)
+4) 12 34 5 (65)
+5) 1 23 45 (54)
+6) 12 3 45 (56)
+7) Treat 12 as 1 rating, total 4 rating (0.7527), the classifier was mainly confusing rating that were next to each other (e.g. confusing a 3 for a 4), 
+   which is understandable given how free text reviews don't always match perfectly with a star rating.
+
+Special combination
+1) 1,3 cons, 2,4 combine, 5 pros (80~81)
+
+
+Observation
+1) 3和45有关系，因为抽了3影响45的accuracy
+
+2) 选1 cons, 23 combine, 45 pros 因为 12 cons, 3 combine, 45 pros的时候, 12的confusion matrix（0.49，0.41；0.28，0.59）很靠近然后只有3很高（0.83）。
+   可是选23的时候 1很高（0.74）3也很高（0.70）
+
+3) 只要2和3在同一组，把2预测成3的机率就很高 （看combination 1&2）
+
+4) 12 data 太少又很像所以合起来最好，345各自有自己的rating，train的时候12用neg，34用combine，5用pos
+
+
+avg_rating code:
+
+def avg_rating(v,w,x,y,z):
+    args = [v,w,x,y,z]
+    numerator = sum([float(i) if i != "none" else 0 for i in args])
+    denominator = sum([1 for i in args if i != "none"])
+    avg = round(numerator/denominator, 1)
+    if float(avg) // 1 >= 4:
+        if float(avg) % 1 >= 0.2:
+            avg = np.ceil(avg)
+        else:
+            avg = np.floor(avg)
+    else:
+        if float(avg) % 1 >= 0.3:
+            avg = np.ceil(avg)
+        else:
+            avg = np.floor(avg)
+            
+    elif float(avg) // 1 == 3:
+        if float(avg) % 1 >= 0.2:
+            avg = np.ceil(avg)
+        else:
+            avg = np.floor(avg)
+            
+    elif float(avg) // 1 == 2:
+        if float(avg) % 1 >= 0.3:
+            avg = np.ceil(avg)
+        else:
+            avg = np.floor(avg)
+        
+    else:
+        if float(avg) % 1 >= 0.8:
+            avg = np.ceil(avg)
+        else:
+            avg = np.floor(avg)
+            
+    return avg
+
+rev["average_rating"] = rev.apply(lambda row: avg_rating(row["work_balance"], row["culture_val"], row["career_opp"], row["comp_benefit"], row["senior_mng"]), axis = 1)
+rev = rev.drop(["work_balance", "culture_val", "career_opp", "comp_benefit", "senior_mng"], axis = 1)
+
+count = 0
+for i in rev.index:
+    if rev["rating"][i] == rev["average_rating"][i]:
+        count += 1
+        
+accuracy = count / rev.shape[0]
+print (accuracy)
+print (rev["rating"].value_counts())
+print (rev["average_rating"].value_counts())
+
+export = rev.drop(["pros", "cons"], axis = 1)
+export_csv = export.to_csv ('C:/Users/A/Desktop/overall_avg3.csv', index = None, header=True)

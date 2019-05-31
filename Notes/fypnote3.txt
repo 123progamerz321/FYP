@@ -1,0 +1,77 @@
+Split training data's reviews based on overall rating, while validation and test data use combined reviews to test the performance of this model
+
+# Ratings 1,2,3 = cons; rating 4 = combine, ratings 5 = pros (only train, validation use combine) 
+0.3610
+
+# Ratings 1 = cons; rating 2,3,4 = combine, ratings 5 = pros
+0.3942
+
+# Ratings 1 = cons; rating 2 = combine, ratings 3,4,5 = pros
+0.3312
+
+# Ratings 1,2 = cons; rating 3,4 = combine, ratings 5 = pros
+0.3873
+
+# Ratings 1 = cons; rating 2,3 = combine, ratings 4,5 = pros
+0.3156
+
+# Ratings 1,2 = cons; rating 3 = combine, ratings 4,5 = pros
+0.2902
+
+# Ratings 1,3 = cons; rating 2, 4 = combine, ratings 5 = pros
+0.3849
+
+# Ratings 3 = cons; rating 1, 2, 4 = combine, ratings 5 = pros
+0.3897
+
+# Ratings 3 = cons; rating 2, 4 = combine, ratings 1, 5 = pros
+0.3775
+
+# Ratings 3 = cons; rating 1, 4 = combine, ratings 2, 5 = pros
+0.3903
+
+# Ratings 1 = cons; rating 2, 4 = combine, ratings 3, 5 = pros
+0.3977
+
+# Combined
+0.4894
+
+
+Split training data's reviews based on overall rating, while split validation and test data based on predicted overall rating
+
+# Ratings 1,2,3 = cons; rating 4 = combine, ratings 5 = pros (only train, validation use combine) 
+0.5822
+
+# Ratings 1 = cons; rating 2,3,4 = combine, ratings 5 = pros
+0.5558
+
+# Ratings 1 = cons; rating 2 = combine, ratings 3,4,5 = pros
+0.4150
+
+# Ratings 1,2 = cons; rating 3,4 = combine, ratings 5 = pros
+0.5578
+
+# Ratings 1 = cons; rating 2,3 = combine, ratings 4,5 = pros
+0.5226
+
+# Ratings 1,2 = cons; rating 3 = combine, ratings 4,5 = pros
+0.5142
+
+# Ratings 1,3 = cons; rating 2, 4 = combine, ratings 5 = pros
+0.5818
+
+# Ratings 3 = cons; rating 1, 2, 4 = combine, ratings 5 = pros
+0.5798
+
+# Ratings 3 = cons; rating 2, 4 = combine, ratings 1, 5 = pros
+0.5688
+
+# Ratings 3 = cons; rating 1, 4 = combine, ratings 2, 5 = pros
+0.5757
+
+# Ratings 1 = cons; rating 2, 4 = combine, ratings 3, 5 = pros
+0.5202
+
+
+Combined reviews
+0.4894
